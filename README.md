@@ -8,37 +8,11 @@ services.
 2. boost.asio.
 
 ## Solution architecture
+![solution design](./doc/design.png)
 
-                    ┌─────────────────────────────────────────────┐
-                    │                                             │
-┌──────────┐        │                ┌────────────────┐           │
-│Traffic   │        │                │          perf  │           │
-│record    ├──────┐ │             ┌──┴───────────┐    │           │
-│database 1│      │ │     TCP     │              │    │           │
-└──────────┘      │ │   ┌─────────* C++11 based  ├────┘           │
-                  ▼ │   │         │  async app   │            ┌───▼────┐
-                 ┌──┴───┴──────┐  └──────────────┘            │        │
-┌──────────┐     │             │                              │ report │
-│Traffic   │     │ TCP Traffic │                              │        │
-│record    ├─────►  Generator  │     ┌────────────────┐       └───▲────┘
-│database 2│     │             │     │          perf  │           │
-└──────────┘     └──┬───┬──────┘  ┌──┴───────────┐    │           │
-                  ▲ │   │         │              │    │           │
-                  │ │   └─────────* c++17 based  ├────┘           │
-┌──────────┐      │ │     TCP     │  async app   │                │
-│Traffic   ├──────┘ │             └──────────────┘                │
-│record    │        │                                             │
-│database 3│        └─────────────────────────────────────────────┘
-└──────────┘
+### Synthetic net protocol layout
+![message layout](./doc/message.png)
 
-
-### Syntetic net protocol layout
-
- ┌───────────┬─────────────┬──────────────────────┐
- │  Message  │ Payload msg.│ Rundomized payload   │
- │   Type    │   length    │       data           │
- │  2 bytes  │  4 bytes    │                      │
- └───────────┴─────────────┴──────────────────────┘
 Note: byte order is the big endian.
 
 Message types:

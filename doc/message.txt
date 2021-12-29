@@ -1,0 +1,5 @@
+ +-----------+-------------+----------------------+
+ |  Message  | Payload msg.| Rundomized payload   |
+ |   Type    |   length    |       data           |
+ |  2 bytes  |  4 bytes    |                      |
+ +-----------+-------------+----------------------+
