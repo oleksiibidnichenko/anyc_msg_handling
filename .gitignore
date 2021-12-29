@@ -31,5 +31,9 @@
 *.out
 *.app
 
+# IDE tmp files
+*.swp
+
 # CMake build directories, CLion style
 /cmake-build-*
+/build

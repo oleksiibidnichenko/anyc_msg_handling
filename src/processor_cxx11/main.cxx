@@ -1,6 +1,8 @@
-#include "../basic_async_model/basic_server.hxx"
+#include "basic_server.hxx"
+#include "control_message_ack.hxx"
 
 #include <iostream>
+#include <vector>
 
 class Cxx11ServerConnection : public TcpServerConnection {
 public:
@@ -52,6 +54,12 @@ static void signal_cb(const boost::system::error_code& error, int /*signal_numbe
 
 int main()
 {
+    // Just testing
+    std::vector<std::byte> storage;
+    msg::ControlMsgAck msg(std::move(storage));
+
+    std::cout << msg.isEmpty() << std::endl;
+
     // Setup TCP listener
     static const int LISTENING_PORT = 32101;
     boost::system::error_code ec;

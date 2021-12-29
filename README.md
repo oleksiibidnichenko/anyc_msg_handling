@@ -41,6 +41,12 @@ services.
  └───────────┴─────────────┴──────────────────────┘
 Note: byte order is the big endian.
 
+Message types:
+- Control Message: 0x1001,
+- Control Message Acknowledgement: 0x1002,
+- Control Message Negative Acknowledgement: 0x1003,
+- Control Message Acknowledgement with Checksum: 0x1004,
+- Data Message: 0x8001.
 
 # Resulting benchmarks
 TBD

@@ -5,12 +5,13 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(BOOST_MIN_VER 1.71)
 find_package(Boost 1.71.0 REQUIRED system)
+find_package(Threads REQUIRED)
 
-set(COMMON_BUILD_FLAGS "-D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_REENTRANT -pthread -Wall -Wextra -pipe -std=c++17")
-set(COMMON_DEBUG_FLAGS "-g")
-set(COMMON_RELEASE_FLAGS "-DNDEBUG -O2 -g")
-set(CMAKE_CXX_FLAGS_DEBUG "${COMMON_BUILD_FLAGS} ${COMMON_DEBUG_FLAGS}")
-set(CMAKE_CXX_FLAGS_RELEASE "${COMMON_BUILD_FLAGS} ${COMMON_RELEASE_FLAGS}")
+add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 
+set(MAIN_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
+set(MESSAGES_INCLUDE_DIR "${MAIN_INCLUDE_DIR}/messages")
 
-add_subdirectory(src)
+add_subdirectory(src/traffic_generator)
+add_subdirectory(src/processor_cxx11)
+add_subdirectory(src/processor_cxx17)
