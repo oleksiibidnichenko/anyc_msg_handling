@@ -13,6 +13,7 @@ set(MAIN_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(MESSAGES_INCLUDE_DIR "${MAIN_INCLUDE_DIR}/messages")
 set(NETWORK_INCLUDE_DIR "${MAIN_INCLUDE_DIR}/network")
 set(CXX11_INCLUDE_DIR "${MAIN_INCLUDE_DIR}/processor_cxx11")
+set(CXX17_INCLUDE_DIR "${MAIN_INCLUDE_DIR}/processor_cxx17")
 set(DUMMY_INCLUDE_DIR "${MAIN_INCLUDE_DIR}/processor_dummy")
 
 add_subdirectory(src/network)
