@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <boost/asio.hpp>
 
-#include "base_message.hxx"
 #include "common_msg_handler.hxx"
+
+#include "mem_alloc.hxx"
+#include "variant_visit.hxx"
 
 namespace app {
 
@@ -25,10 +26,17 @@ protected:
     void onConnTerm() noexcept override;
 
 private:
-    using Container = std::vector<std::byte>;
+    using Container = std::pmr::vector<std::byte>;
+    using Message = std::variant<std::monostate,
+                                 msg::ControlMsg<Container>,
+                                 msg::ControlMsgAck<Container>,
+                                 msg::ControlMsgNack<Container>,
+                                 msg::ControlMsgAckCks<Container>,
+                                 msg::DataMsg<Container>>;
 
-    void HandleMessage(std::unique_ptr<msg::BaseMsg> msg);
+    void HandleMessage(Message msg);
 
+    mem::MemoryResHandler mMemRes;
     size_t mCtr;
 };
 
