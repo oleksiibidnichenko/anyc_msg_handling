@@ -22,6 +22,7 @@ void TcpServerConnection::resetConnection()
 {
     if (mSocket.is_open()) {
         mSocket.close();
+        onConnTerm();
     }
 }
 

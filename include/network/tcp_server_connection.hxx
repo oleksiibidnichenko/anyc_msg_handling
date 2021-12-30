@@ -35,6 +35,7 @@ protected:
 
     virtual bool isValidMsgType() const = 0;
     virtual uint32_t getBodySize() const noexcept = 0;
+    virtual void onConnTerm() noexcept = 0;
 
     std::vector<std::byte> mInputBuffer;
 

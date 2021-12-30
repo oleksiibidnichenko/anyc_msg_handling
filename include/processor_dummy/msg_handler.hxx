@@ -3,11 +3,11 @@
 #include <memory>
 #include <boost/asio.hpp>
 
-#include "tcp_server_connection.hxx"
+#include "common_msg_handler.hxx"
 
-namespace dummy_app {
+namespace app {
 
-class MessageHandler: public net::TcpServerConnection {
+class MessageHandler final: public CommonMessageHandler {
 public:
     explicit MessageHandler(boost::asio::io_context &io_context);
     ~MessageHandler() = default;
@@ -20,14 +20,6 @@ public:
 
 protected:
     void cbReceive(const std::vector<std::byte>& data) override;
-
-    bool isValidMsgType() const override;
-    uint32_t getBodySize() const noexcept override;
-private:
-    uint16_t getMsgType() const;
-
-    static constexpr size_t sMsgTypeLen = 2;
-    static constexpr size_t sMsgSizeLen = 4;
 };
 
-}  // namespace dummy_app
+}  // namespace app
