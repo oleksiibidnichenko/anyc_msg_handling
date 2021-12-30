@@ -8,7 +8,7 @@ namespace msg {
 template <typename Container, size_t MaxSize = 16>
 class ControlMsgAck: public ControlMsg<Container, MaxSize> {
 public:
-    ControlMsgAck(Container&& stg):
+    explicit ControlMsgAck(Container&& stg):
         ControlMsg<Container, MaxSize>(std::forward<Container>(stg)) {};
 
     ControlMsgAck(const ControlMsgAck&) = delete;

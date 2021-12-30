@@ -1,4 +1,4 @@
-project(processor_cxx11)
+project(processor_dummy)
 
 add_executable(${PROJECT_NAME}
     main.cxx
@@ -6,7 +6,7 @@ add_executable(${PROJECT_NAME}
     )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
-    ${CXX11_INCLUDE_DIR}
+    ${DUMMY_INCLUDE_DIR}
     ${MESSAGES_INCLUDE_DIR}
     )
 

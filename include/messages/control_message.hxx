@@ -8,7 +8,7 @@ namespace msg {
 template <typename Container, size_t MaxSize = 64>
 class ControlMsg: public BaseMsg {
 public:
-    ControlMsg(Container&& stg): m_stg(std::forward<Container>(stg))
+    explicit ControlMsg(Container&& stg): m_stg(std::forward<Container>(stg))
     {
         Reserve(MaxSize);
     }

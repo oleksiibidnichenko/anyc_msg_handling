@@ -11,7 +11,12 @@ add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 
 set(MAIN_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(MESSAGES_INCLUDE_DIR "${MAIN_INCLUDE_DIR}/messages")
+set(NETWORK_INCLUDE_DIR "${MAIN_INCLUDE_DIR}/network")
+set(CXX11_INCLUDE_DIR "${MAIN_INCLUDE_DIR}/processor_cxx11")
+set(DUMMY_INCLUDE_DIR "${MAIN_INCLUDE_DIR}/processor_dummy")
 
-add_subdirectory(src/traffic_generator)
+add_subdirectory(src/network)
 add_subdirectory(src/processor_cxx11)
 add_subdirectory(src/processor_cxx17)
+add_subdirectory(src/processor_dummy)
+add_subdirectory(src/traffic_generator)

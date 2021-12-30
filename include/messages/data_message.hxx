@@ -6,9 +6,9 @@
 namespace msg {
 
 template <typename Container, size_t MaxSize = 65536>
-class DataMsg final : public ControlMsg<Container> {
+class DataMsg final : public ControlMsg<Container, MaxSize> {
 public:
-    DataMsg(Container&& stg):
+    explicit DataMsg(Container&& stg):
         ControlMsg<Container, MaxSize>(std::forward<Container>(stg)) {};
 
     DataMsg(const DataMsg&) = delete;
@@ -24,7 +24,7 @@ public:
 
     void Reserve(size_t size) override
     {
-        ControlMsg<Container>::Reserve(size);
+        ControlMsg<Container, MaxSize>::Reserve(size);
     }
 };
 
