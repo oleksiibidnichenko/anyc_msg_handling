@@ -8,7 +8,7 @@ namespace msg {
 template <typename Container>
 class ControlMsgAckCks final: public ControlMsgAck<Container> {
 public:
-    ControlMsgAckCks(Container&& stg):
+    explicit ControlMsgAckCks(Container&& stg):
         ControlMsgAck<Container>(std::forward<Container>(stg)) {};
 
     ControlMsgAckCks(const ControlMsgAckCks&) = delete;
