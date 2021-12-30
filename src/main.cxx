@@ -26,7 +26,7 @@ int main()
     // Setup TCP listener
     constexpr uint16_t listening_port = 32101;
     net::TcpAcceptor acceptor(io_context,
-            std::make_unique<dummy_app::MessageHandler>(io_context));
+            std::make_unique<app::MessageHandler>(io_context));
 
     acceptor.start(boost::asio::ip::tcp::endpoint(
                 boost::asio::ip::address_v4(), listening_port));

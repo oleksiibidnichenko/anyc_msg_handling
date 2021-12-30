@@ -1,10 +1,15 @@
 #pragma once
 
-#include <memory>
+#include <variant>
 #include <boost/asio.hpp>
 
-#include "base_message.hxx"
 #include "common_msg_handler.hxx"
+
+#include "control_message.hxx"
+#include "control_message_ack.hxx"
+#include "control_message_ack_with_checksum.hxx"
+#include "control_message_nack.hxx"
+#include "data_message.hxx"
 
 namespace app {
 
@@ -24,8 +29,13 @@ protected:
 
 private:
     using Container = std::vector<std::byte>;
+    using Message = std::variant<msg::ControlMsg<Container>,
+                                 msg::ControlMsgAck<Container>,
+                                 msg::ControlMsgNack<Container>,
+                                 msg::ControlMsgAckCks<Container>,
+                                 msg::DataMsg<Container>>;
 
-    void HandleMessage(std::unique_ptr<msg::BaseMsg> msg);
+    void HandleMessage(Message msg);
 };
 
 }  // namespace app
