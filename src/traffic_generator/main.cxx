@@ -117,6 +117,7 @@ int main(int argc, char **argv)
     }
     size_t sent_messages = sent_portions * 100;
     double rate = (double)sent_messages / send_seconds;
+    std::cout << sent_messages << " sent messages" << std::endl;
     std::cout << "Send rate: " << rate << " messages per second" << std::endl;
     double ns_per_message = 1.0e9 / rate;
     std::cout << ns_per_message << " ns spent for one message" << std::endl;
