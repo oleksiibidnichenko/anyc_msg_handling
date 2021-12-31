@@ -42,11 +42,6 @@ t - time in seconds (default value is 10);
 m - message type in the following format (MSG_ID:MSG_SIZE_BYTES:FRACTION).
 
 # Resulting benchmarks
-Traffic_generator command options
-```
--m 1001:64:25 -m 1002:16:25 -m 8001:1500:50 -t10
-```
-
 ## CPU:
 11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz   1.38 GHz
 
