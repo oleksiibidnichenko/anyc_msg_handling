@@ -32,7 +32,7 @@ void composeMessageQueue()
             for (unsigned i = 0; i < 6; ++i) {
                 full_body.push_back(head[i]);
             }
-            for (unsigned i = 6; i < one_spec.size; ++i) {
+            for (unsigned i = 0; i < one_spec.size; ++i) {
                 full_body.push_back(filler_byte);
             }
         }
@@ -62,7 +62,7 @@ void parseMessageSpec(const char *spec_text)
                 % one_spec.size % spec_text_orig;
         throw std::runtime_error(formatted.str());
     }
-    if (one_spec.fraction == 0 || one_spec.size > 100) {
+    if (one_spec.fraction == 0 || one_spec.fraction > 100) {
         auto formatted = boost::format("Wrong fraction: %d in message spec: %s")
                          % one_spec.fraction % spec_text_orig;
         throw std::runtime_error(formatted.str());
