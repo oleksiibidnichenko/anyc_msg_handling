@@ -1,6 +1,12 @@
 #pragma once
 
+#if __cplusplus == 201703L
 #include <cstddef>
+#else
+namespace std {
+    using byte = unsigned char;
+}
+#endif
 #include <boost/asio.hpp>
 
 namespace net {
@@ -40,9 +46,6 @@ protected:
     std::vector<std::byte> mInputBuffer;
 
 private:
-    static constexpr size_t sInputBufferSize = 65536;
-    static constexpr size_t sMinHeaderSize = 6;
-
     void readMsgBody(size_t len);
     void readMsgIgnore(size_t len);
 

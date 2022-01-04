@@ -1,7 +1,13 @@
 #pragma once
 
 #include <cinttypes>
+#if __cplusplus == 201703L
 #include <cstddef>
+#else
+namespace std {
+    using byte = unsigned char;
+}
+#endif
 
 namespace msg {
 

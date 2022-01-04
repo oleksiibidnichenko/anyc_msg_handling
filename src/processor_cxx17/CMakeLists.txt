@@ -16,3 +16,5 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 target_link_libraries(${PROJECT_NAME} PRIVATE
     network
     )
+
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)

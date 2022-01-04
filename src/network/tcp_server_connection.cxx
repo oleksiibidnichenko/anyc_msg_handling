@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "common_limit.hxx"
+
 //--------------------------------------------------------------
 // TcpServerConnection
 
@@ -10,7 +12,7 @@ namespace net {
 TcpServerConnection::TcpServerConnection(boost::asio::io_context &io_context)
     : mSocket(io_context)
 {
-    mInputBuffer.resize(sMinHeaderSize);
+    mInputBuffer.reserve(limit::max_msg_size);
 }
 
 TcpServerConnection::~TcpServerConnection()
@@ -28,8 +30,9 @@ void TcpServerConnection::resetConnection()
 
 void TcpServerConnection::readMsgHeader()
 {
+    mInputBuffer.resize(limit::min_header_size);
     boost::asio::async_read(mSocket, boost::asio::buffer(mInputBuffer),
-            boost::asio::transfer_exactly(sMinHeaderSize),
+            boost::asio::transfer_exactly(limit::min_header_size),
             [this] (const boost::system::error_code& ec, size_t len)
             {
                 onReadHeader(ec, len);
@@ -38,9 +41,9 @@ void TcpServerConnection::readMsgHeader()
 
 void TcpServerConnection::readMsgBody(size_t len)
 {
-    mInputBuffer.resize(sMinHeaderSize + len);
+    mInputBuffer.resize(limit::min_header_size + len);
     boost::asio::async_read(mSocket,
-        boost::asio::buffer(&mInputBuffer[sMinHeaderSize], len),
+        boost::asio::buffer(&mInputBuffer[limit::min_header_size], len),
         boost::asio::transfer_exactly(len),
         [this] (const boost::system::error_code& ec, size_t len)
         {
@@ -55,9 +58,9 @@ void TcpServerConnection::readMsgIgnore(size_t len)
     } else {
         // LIMITATION we hope nobody will try to send gigabytes of data and one
         // async_read will be enough.
-        mInputBuffer.resize(sMinHeaderSize + len);
+        mInputBuffer.resize(limit::min_header_size + len);
         boost::asio::async_read(mSocket,
-            boost::asio::buffer(&mInputBuffer[sMinHeaderSize], len),
+            boost::asio::buffer(&mInputBuffer[limit::min_header_size], len),
             boost::asio::transfer_exactly(len),
             [this] (const boost::system::error_code& ec, size_t len)
             {
@@ -80,9 +83,9 @@ void TcpServerConnection::onReadHeader(const boost::system::error_code& ec,
         return;
     }
 
-    if (len != sMinHeaderSize) {
+    if (len != limit::min_header_size) {
         std::cerr << __func__ << ": Missing data! Expected: "
-            << sMinHeaderSize << " Actual: " << len << std::endl;
+            << limit::min_header_size << " Actual: " << len << std::endl;
         return;
     }
 

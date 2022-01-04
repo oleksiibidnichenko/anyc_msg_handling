@@ -6,6 +6,7 @@ add_library(${PROJECT_NAME} STATIC
     )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
+    ${MAIN_INCLUDE_DIR}
     ${NETWORK_INCLUDE_DIR}
     )
 

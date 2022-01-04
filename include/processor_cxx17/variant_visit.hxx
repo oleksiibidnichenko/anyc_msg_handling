@@ -20,42 +20,62 @@ struct VariantVisit final {
 
     void operator()(msg::ControlMsg<Container>& msg)
     {
-        std::cerr << "Handling Control Message."
-                  << " First byte" << std::hex
-                  << static_cast<uint8_t>(*msg.GetRawBuffer())
-                  << std::endl;
+#ifdef NDEBUG
+    static_cast<void>(msg);
+#else
+    std::cout << "Handling Control Message."
+              << " First byte" << std::hex
+              << static_cast<uint8_t>(*msg.GetRawBuffer())
+              << std::endl;
+#endif
     }
 
     void operator()(msg::ControlMsgAck<Container>& msg)
     {
-        std::cerr << "Handling Control Acknowledgement Message."
-                  << " First byte" << std::hex
-                  << static_cast<uint8_t>(*msg.GetRawBuffer())
-                  << std::endl;
+#ifdef NDEBUG
+    static_cast<void>(msg);
+#else
+    std::cout << "Handling Control Acknowledgement Message."
+              << " First byte" << std::hex
+              << static_cast<uint8_t>(*msg.GetRawBuffer())
+              << std::endl;
+#endif
     }
 
     void operator()(msg::ControlMsgNack<Container>& msg)
     {
-        std::cerr << "Handling Control Negative Acknowledgement Message."
-                  << " First byte" << std::hex
-                  << static_cast<uint8_t>(*msg.GetRawBuffer())
-                  << std::endl;
+#ifdef NDEBUG
+    static_cast<void>(msg);
+#else
+    std::cout << "Handling Control Negative Acknowledgement Message."
+              << " First byte" << std::hex
+              << static_cast<uint8_t>(*msg.GetRawBuffer())
+              << std::endl;
+#endif
     }
 
     void operator()(msg::ControlMsgAckCks<Container>& msg)
     {
-        std::cerr << "Handling Control Acknowledgement with Checksum"
-                  << " Message. First byte" << std::hex
-                  << static_cast<uint8_t>(*msg.GetRawBuffer())
-                  << std::endl;
+#ifdef NDEBUG
+    static_cast<void>(msg);
+#else
+    std::cout << "Handling Control Acknowledgement with Checksum"
+              << " Message. First byte" << std::hex
+              << static_cast<uint8_t>(*msg.GetRawBuffer())
+              << std::endl;
+#endif
     }
 
     void operator()(msg::DataMsg<Container>& msg)
     {
-        std::cerr << "Handling Data Message."
-                  << " First byte" << std::hex
-                  << static_cast<uint8_t>(*msg.GetRawBuffer())
-                  << std::endl;
+#ifdef NDEBUG
+    static_cast<void>(msg);
+#else
+    std::cout << "Handling Data Message."
+              << " First byte" << std::hex
+              << static_cast<uint8_t>(*msg.GetRawBuffer())
+              << std::endl;
+#endif
     }
 };
 
