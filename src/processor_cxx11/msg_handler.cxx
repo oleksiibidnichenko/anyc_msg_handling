@@ -68,56 +68,76 @@ void MessageHandler::HandleMessage(std::unique_ptr<msg::BaseMsg> msg)
         case msg::MsgType::ControlMsg:
             {
                 auto ptr = dynamic_cast<msg::ControlMsg<Container>*>(msg.get());
+#ifdef NDEBUG
+                static_cast<void>(ptr);
+#else
                 if (ptr) {
-                    std::cerr << "Handling Control Message."
+                    std::cout << "Handling Control Message."
                               << " First byte" << std::hex
                               << static_cast<uint8_t>(*ptr->GetRawBuffer())
                               << std::endl;
                 }
+#endif
             }
             break;
         case msg::MsgType::ControlMsgAck:
             {
                 auto ptr = dynamic_cast<msg::ControlMsgAck<Container>*>(msg.get());
+#ifdef NDEBUG
+                static_cast<void>(ptr);
+#else
                 if (ptr) {
-                    std::cerr << "Handling Control Acknowledgement Message."
+                    std::cout << "Handling Control Acknowledgement Message."
                               << " First byte" << std::hex
                               << static_cast<uint8_t>(*ptr->GetRawBuffer())
                               << std::endl;
                 }
+#endif
             }
             break;
         case msg::MsgType::ControlMsgNack:
             {
                 auto ptr = dynamic_cast<msg::ControlMsgNack<Container>*>(msg.get());
+#ifdef NDEBUG
+                static_cast<void>(ptr);
+#else
                 if (ptr) {
-                    std::cerr << "Handling Control Negative Acknowledgement Message."
+                    std::cout << "Handling Control Negative Acknowledgement Message."
                               << " First byte" << std::hex
                               << static_cast<uint8_t>(*ptr->GetRawBuffer())
                               << std::endl;
                 }
+#endif
             }
             break;
         case msg::MsgType::ControlMsgAckCks:
             {
                 auto ptr = dynamic_cast<msg::ControlMsgAckCks<Container>*>(msg.get());
+#ifdef NDEBUG
+                static_cast<void>(ptr);
+#else
                 if (ptr) {
-                    std::cerr << "Handling Control Acknowledgement with Checksum Message."
+                    std::cout << "Handling Control Acknowledgement with Checksum Message."
                               << " First byte" << std::hex
                               << static_cast<uint8_t>(*ptr->GetRawBuffer())
                               << std::endl;
                 }
+#endif
             }
             break;
         case msg::MsgType::DataMsg:
             {
                 auto ptr = dynamic_cast<msg::DataMsg<Container>*>(msg.get());
+#ifdef NDEBUG
+                static_cast<void>(ptr);
+#else
                 if (ptr) {
-                    std::cerr << "Handling Data Message."
+                    std::cout << "Handling Data Message."
                               << " First byte" << std::hex
                               << static_cast<uint8_t>(*ptr->GetRawBuffer())
                               << std::endl;
                 }
+#endif
             }
             break;
         default:

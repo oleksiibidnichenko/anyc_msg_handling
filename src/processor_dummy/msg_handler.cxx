@@ -26,8 +26,12 @@ void MessageHandler::cbReceive(const std::vector<std::byte>& data)
         return;
     }
 
+#ifdef NDEBUG
+    static_cast<void>(data);
+#else
     std::cout << "received a sequence of " << data.size() << " bytes"
         << std::endl;
+#endif
 }
 
 }  // namespace app

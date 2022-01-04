@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(async_msg_handling_cpp17)
 
-set(CMAKE_CXX_STANDARD 17)
-
 set(BOOST_MIN_VER 1.71)
 find_package(Boost 1.71.0 REQUIRED system)
 find_package(Threads REQUIRED)

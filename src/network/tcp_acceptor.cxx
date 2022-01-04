@@ -7,6 +7,8 @@
 
 namespace net {
 
+constexpr int TcpAcceptor::sTimerDuration;
+
 TcpAcceptor::TcpAcceptor(boost::asio::io_context &io,
                          std::unique_ptr<TcpServerConnection> connection)
     : mListeningSocket(io),
